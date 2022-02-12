@@ -1,67 +1,3 @@
-// intializations
-const inputNums = document.getElementById('input_nums');
-const addAnswer = document.getElementById('add_answer');
-const subAnswer = document.getElementById('sub_answer');
-const divAnswer = document.getElementById('div_answer');
-const multAnswer = document.getElementById('mult_answer');
-
-
-
-
-// GET data from url
-const fetchData = async () => {
-   // activate loading animation
-   inputNums.classList.add("loading");
-
-   try {
-      // retrieve data
-      const res = await axios.get("https://100insure.com/mi/api1.php");
-      const num1 = convertString(res.data.key1);
-      const num2 = convertString(res.data.key2);
-
-      // display retrieved data
-      inputNums.classList.remove("loading");
-      inputNums.innerHTML = `${res.data.key1} and ${res.data.key2}`;
-
-   } catch (e) {
-      console.log("ERROR: ", e);
-   }
-}
-
-const postData = async (n1, n2) => {
-   // activate loading animation
-   for (let answer of [addAnswer, subAnswer, multAnswer, divAnswer]) {
-      answer.classList.add("loading");
-   }
-
-   try {
-      const res = await axios.post("https://100insure.com/mi/api2.php", {
-         num1: '44',
-         num2: '2',
-         operation: 'times'
-      }, {
-         headers: {
-            'content-type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-         }
-      })
-
-      console.log(res);
-      // display retrieved data
-      /*       for (let answer of [addAnswer, subAnswer, multAnswer, divAnswer]) {
-               answer.classList.remove("loading");
-            }
-            addAnswer.innerHTML = res.data.something1;
-            subAnswer.innerHTML = res.data.something2;
-            multAnswer.innerHTML = res.data.something3;
-            divAnswer.innerHTML = res.data.something4; */
-
-   } catch (e) {
-      console.log("ERROR", e);
-   }
-}
-
-
 // convert JSON to integers (1 - 99)
 function convertString(dataString) {
    let convertedValue = 0;
@@ -126,13 +62,48 @@ function convertString(dataString) {
 }
 
 
+// process POST requests
+const postData = async (n1, n2, operation) => {
+   try {
+      const res = await axios.post("https://100insure.com/mi/api2.php", {
+         num1: n1,
+         num2: n2,
+         operation: operation
+      }, {
+         headers: {
+            'Content-Type': 'application/json',
+         }
+      })
 
-// on page load
-const onPageLoad = async () => {
-   await fetchData();
-   postData();
+      return res.data;
+   } catch (err) {
+      throw new AppError(err);
+   }
 }
 
 
 
-onPageLoad();
+// RGE route
+app.get('/RGE', wrapAsync(async (req, res) => {
+   let num1, num2;
+   let timesResponse, plusResponse, divideResponse, minusResponse;
+
+   try {
+      // process GET request
+      const res = await axios.get("https://100insure.com/mi/api1.php");
+      num1 = convertString(res.data.key1);
+      num2 = convertString(res.data.key2);
+      inputNums = `${res.data.key1} and ${res.data.key2}`;
+
+      // process POST requests
+      timesResponse = await postData(num1, num2, 'times');
+      plusResponse = await postData(num1, num2, 'plus');
+      divideResponse = (await postData(num1, num2, 'divided by')).toFixed(2);
+      minusResponse = await postData(num1, num2, 'minus');
+
+   } catch (err) {
+      throw new AppError(err);
+   }
+
+   res.render('./pages/RGE', { inputNums, plusResponse, minusResponse, divideResponse, timesResponse });
+}))

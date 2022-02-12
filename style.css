@@ -35,16 +35,18 @@ table {
 
 
 /*--------------------------------------------------------------------------------- GLOBAL*/
-:root {
-   --content_border: rgba(225, 225, 225, .9);
-   --nav_attention: rgba(138, 126, 126, 0.75);
-   --content_background: rgba(0,0,0,.7);
-   --content_text: rgba(199, 206, 255, 1);
-   --content_text_hover: rgba(239, 236, 255, 1);
-}
+body {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   box-sizing: border-box;
 
-html {
-   box-sizing: border-box;  
+   font-family: 'IBM Plex Mono', monospace;
+   
+   background: rgb(229, 243, 165);
+   background: radial-gradient(circle, rgba(111, 188, 233, 0.2) 0%, rgba(234, 154, 236, .3) 100%);
 }
 
 h1 {
@@ -52,72 +54,50 @@ h1 {
    padding: 1rem;
    text-shadow: 1px 1px 1px black;
 }
+
 h2 {
    font-size: 1.5rem;
    margin: .5rem 0 .75rem 0;
 }
+
 #input_nums {
    font-size: 2rem;
 }
-body {
-   display: flex;
-   justify-content: center;
-   box-sizing: border-box;
-   font-family: 'IBM Plex Mono', monospace;
-   flex-wrap: wrap;
-   align-items: center;
-   flex-direction: column;  
-   background: rgb(229, 243, 165);
-   background: radial-gradient(circle, rgba(111, 188, 233, 0.2) 0%, rgba(234, 154, 236, .3) 100%);
- }
 
- main {
+
+
+
+
+/*--------------------------------------------------------------------------------- DATA DISPLAY */
+main {
    display: flex;
    align-items: center;
    flex-direction: column;
-   border: 2px solid rgb(159, 160, 255);
-   border-radius: 2rem;
    padding: 2rem;
-   margin: 2rem;
+   margin: 1rem;
    width: 50%;
-   box-shadow: 5px 8px 8px rgb(75,75,75);
+
+   border-radius: 2rem;
+   border: 2px solid rgb(159, 160, 255);
+   box-shadow: 5px 8px 8px rgb(75, 75, 75);
    background: rgb(151,157,121);
    background: linear-gradient(170deg, rgba(151,157,121,.3) 0%, rgba(68,125,138,.3) 39%, rgba(49,33,80,.27) 59%, rgba(104,102,106,.27) 100%);
- }
+}
 
- .operation {
+.operation {
    display: flex;
    flex-direction: column;
    align-items: center;
+   margin: .5rem;
    padding: 1rem;
+
    border-radius: .5rem;
    border: 2px solid rgb(159, 160, 255);
-   margin: .5rem;
-   font-size: 1.5rem;
    background: rgb(255,255,255);
    background: linear-gradient(42deg, rgba(245,245,245,1) 0%, rgba(177,214,215,0.5) 100%); 
-   /* background: linear-gradient(42deg, rgba(235,235,235,1) 0%, rgba(197,234,235,0.5) 100%); */
-   transition-timing-function: ease-in;
- }
-.operation h3 {
-   margin: .25rem;
+   font-size: 1.5rem;
  }
 
-.operation p {
+.operation h3, p {
    margin: .25rem;
-}
-
-@keyframes loading_func {
-   0% {
-      color: rgba(0,0,0, 1);
-   }
-   70% {
-      color: rgba(0,0,0, .5);
-   }
-   100% {
-      color: rgba(0,0,0, .40);
-   }
-}
-.loading {
-   animation: loading_func 1.5s infinite alternate-reverse; /* linear 0 infinite ;*/
-}
+ }

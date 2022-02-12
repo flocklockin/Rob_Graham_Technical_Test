@@ -10,16 +10,7 @@
    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link
-      href="https://fonts.googleapis.com/css2?family=Bitter:wght@300&family=Nanum+Gothic&family=Quicksand:wght@500&display=swap"
-      rel="stylesheet">
-
-
-   <link rel="stylesheet" href="style.css">
-
-   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <link rel="stylesheet" href="/views/styles/RGE.css">
 </head>
 
 
@@ -28,36 +19,42 @@
       &lt; Technical Test &gt;
    </h1>
 
-   <!--    <h2>
-      Complex arithmetic powered by <i>Rob Graham Enterprises</i>
-   </h2> -->
-
    <h2>
       Input:
    </h2>
-   <p id="input_nums">loading...</p>
+
+   <p id="input_nums">
+      <%=inputNums%>
+   </p>
+
 
    <main>
       <article class="operation">
          <h3>Addition</h3>
-         <p id="add_answer">loading...</p>
+         <p>
+            <%=plusResponse%>
+         </p>
       </article>
 
       <article class="operation">
          <h3>Subtraction</h3>
-         <p id="sub_answer">loading...</p>
+         <p>
+            <%=minusResponse%>
+         </p>
       </article>
 
       <article class="operation">
          <h3>Division</h3>
-         <p id="div_answer">loading...</p>
+         <p>
+            <%=divideResponse%>
+         </p>
       </article>
 
       <article class="operation">
          <h3>Multiplication</h3>
-         <p id="mult_answer">loading...</p>
+         <p>
+            <%=timesResponse%>
+         </p>
       </article>
    </main>
-
-   <script src="app.js"></script>
 </body>

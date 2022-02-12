@@ -58,8 +58,18 @@ function convertString(dataString) {
    if (dataString.includes('ninety'))
       convertedValue += 81;
 
+   if (dataString == 'sixty-six')
+      return 66;
+   if (dataString == 'seventy-seven')
+      return 77;
+   if (dataString == 'eighty-eight')
+      return 88;
+   if (dataString == 'ninety-nine')
+      return 99;
+
    return convertedValue;
 }
+
 
 
 // process POST requests
